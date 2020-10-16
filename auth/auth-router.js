@@ -1,14 +1,16 @@
 const router = require('express').Router();
 const bcryptjs = require('bcryptjs');
 const db = require('../database/dbConfig.js');
-const generateToken = require('./generateToken.js');
+const generateToken = require('./genToken.js');
 
 router.post('/register', async (req, res) => {
   const { username, password } = req.body;
 
-  if(!username || !password) return res.status(400).json({ error: 'Provide both a username and password' });
+  console.log(req.body)
+  
+  if(!username || !password) return res.status(400).json({ error: 'Please Provide Both a Username and password' });
 
-  const hash = bcryptjs.hashSync(password, process.env.HASH_ROUNDS || 8);
+  const hash = bcryptjs.hashSync(password, process.env.HASH_ROUNDS || 4);
 
   try {
     await db('users').insert({ username, password: hash })

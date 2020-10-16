@@ -6,7 +6,7 @@ function generateToken(user) {
     subject: user.id,
     username: user.username
   }
-
+console.log(payload)
   const options = {
     expiresIn: '1d',
   };
